@@ -2,6 +2,17 @@ enum RadioMessage {
     message1 = 49434,
     touché = 2826
 }
+function Enn_bul () {
+    ennemie_bullet = game.createSprite(ennemie.get(LedSpriteProperty.X), 4)
+    for (let index = 0; index < 5; index++) {
+        ennemie_bullet.change(LedSpriteProperty.Y, -1)
+        basic.pause(200)
+        if (ennemie_bullet.isTouching(sprite)) {
+            ennemie_bullet.delete()
+        }
+    }
+    ennemie_bullet.delete()
+}
 radio.onReceivedMessage(RadioMessage.touché, function () {
     game.removeLife(1)
 })
@@ -31,19 +42,11 @@ radio.onReceivedValue(function (name, value) {
         ennemie.set(LedSpriteProperty.X, value)
     }
     if (name == "enn bul") {
-        ennemie_bullet = game.createSprite(ennemie.get(LedSpriteProperty.X), 4)
-        for (let index = 0; index < 5; index++) {
-            ennemie_bullet.change(LedSpriteProperty.Y, -1)
-            basic.pause(200)
-            if (ennemie_bullet.isTouching(sprite)) {
-                ennemie_bullet.delete()
-            }
-        }
-        ennemie_bullet.delete()
+        Enn_bul()
     }
 })
-let ennemie_bullet: game.LedSprite = null
 let bullet: game.LedSprite = null
+let ennemie_bullet: game.LedSprite = null
 let ennemie: game.LedSprite = null
 let sprite: game.LedSprite = null
 radio.setGroup(125)

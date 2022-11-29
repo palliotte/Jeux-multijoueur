@@ -23,8 +23,11 @@ input.onButtonPressed(Button.AB, function () {
             bullet.delete()
             radio.sendMessage(RadioMessage.touché)
         }
-        if (bullet.isTouching(ennemie_bullet)) {
-            ennemie_bullet.delete()
+        if (ennemie_bullet) {
+            if (bullet.isTouching(ennemie_bullet)) {
+                ennemie_bullet.delete()
+                bullet.delete()
+            }
         }
     }
     bullet.delete()
@@ -41,8 +44,11 @@ radio.onReceivedValue(function (name, value) {
             if (ennemie_bullet.isTouching(sprite)) {
                 ennemie_bullet.delete()
             }
-            if (bullet.isTouching(ennemie_bullet)) {
-                ennemie_bullet.delete()
+            if (bullet) {
+                if (bullet.isTouching(ennemie_bullet)) {
+                    ennemie_bullet.delete()
+                    bullet.delete()
+                }
             }
         }
         ennemie_bullet.delete()
